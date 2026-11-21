@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline Generator | CYBERNEX</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">CYBERNEX</div>
+    <div class="tagline">CYBER INCIDENT INTELLIGENCE</div>
+
+    <div class="nav-title">MAIN MENU</div>
+    <a href="../index.html">◈ Dashboard</a>
+    <a href="global-incidents.html">🌍 Global Incident Explorer</a>
+    <a class="active" href="timeline.html">◷ Timeline Generator</a>
+
+    <div class="nav-title">MANAGEMENT</div>
+    <a href="incident-management.html">▣ Incident Management</a>
+    <a href="threat-intelligence.html">⌁ Threat Intelligence</a>
+    <a href="evidence.html">▤ Evidence Management</a>
+    <a href="assets.html">◈ Affected Assets</a>
+
+    <div class="nav-title">OPERATIONS</div>
+    <a href="response.html">⚡ Response & Recovery</a>
+    <a href="reports.html">▥ Reports & Analytics</a>
+    <a href="settings.html">⚙ Settings & Profile</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1>◷ Timeline Generator</h1>
+        <div class="status">● TIMELINE ACTIVE</div>
+    </div>
+
+    <div class="welcome">
+        <h2>Cyber Incident Timeline</h2>
+        <p>Create, organize and track the chronological sequence of cyber incident events.</p>
+    </div>
+
+    <div class="form-card">
+        <h2 class="section-title">Add Timeline Event</h2>
+
+        <form id="eventForm">
+            <label>Event Name</label>
+            <input id="eventName" type="text" placeholder="Enter event name" required>
+
+            <label>Country</label>
+            <input id="eventCountry" type="text" placeholder="Enter country" required>
+
+            <label>Organization</label>
+            <input id="eventOrg" type="text" placeholder="Enter organization" required>
+
+            <label>Event Date & Time</label>
+            <input id="eventDate" type="datetime-local" required>
+
+            <label>Event Type</label>
+            <select id="eventType">
+                <option>Detection</option>
+                <option>Investigation</option>
+                <option>Response</option>
+                <option>Recovery</option>
+                <option>Other</option>
+            </select>
+
+            <label>Description</label>
+            <textarea id="eventDescription" rows="3" placeholder="Describe the event"></textarea>
+
+            <button type="submit">+ Add Timeline Event</button>
+        </form>
+    </div>
+
+    <h2 class="section-title">Incident Timeline</h2>
+    <div class="panel">
+        <div id="timelineList"></div>
+    </div>
+
+    <button onclick="window.print()">Print Timeline</button>
+    <button onclick="clearTimeline()">Clear Timeline</button>
+
+    <div class="footer">CYBERNEX © 2026 | Timeline Generator</div>
+</div>
+<script src="../js/evidence.js"></script>
+</body>
+</html>
+

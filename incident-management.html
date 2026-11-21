@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incident Management | CYBERNEX</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">CYBERNEX</div>
+    <div class="tagline">CYBER INCIDENT INTELLIGENCE</div>
+
+    <div class="nav-title">MAIN MENU</div>
+    <a href="../index.html">◈ Dashboard</a>
+    <a href="global-incidents.html">🌍 Global Incident Explorer</a>
+    <a href="timeline.html">◷ Timeline Generator</a>
+
+    <div class="nav-title">MANAGEMENT</div>
+    <a class="active" href="incident-management.html">▣ Incident Management</a>
+    <a href="threat-intelligence.html">⌁ Threat Intelligence</a>
+    <a href="evidence.html">▤ Evidence Management</a>
+    <a href="assets.html">◈ Affected Assets</a>
+
+    <div class="nav-title">OPERATIONS</div>
+    <a href="response.html">⚡ Response & Recovery</a>
+    <a href="reports.html">▥ Reports & Analytics</a>
+    <a href="settings.html">⚙ Settings & Profile</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1>▣ Incident Management</h1>
+        <div class="status">● MANAGEMENT ACTIVE</div>
+    </div>
+
+    <div class="welcome">
+        <h2>Manage Cyber Incidents</h2>
+        <p>Register, search, update and monitor cyber incident records.</p>
+    </div>
+
+    <div class="stats">
+        <div class="card pink"><p>TOTAL INCIDENTS</p><h2 id="total">0</h2></div>
+        <div class="card orange"><p>CRITICAL</p><h2 id="critical">0</h2></div>
+        <div class="card blue"><p>OPEN</p><h2 id="open">0</h2></div>
+        <div class="card green"><p>RESOLVED</p><h2 id="resolved">0</h2></div>
+    </div>
+
+    <div class="form-card">
+        <h2 class="section-title">Register New Incident</h2>
+
+        <form id="incidentForm">
+            <label>Incident Name</label>
+            <input id="name" required placeholder="Enter incident name">
+
+            <label>Country</label>
+            <input id="country" required placeholder="Enter country">
+
+            <label>Organization</label>
+            <input id="organization" required placeholder="Enter organization">
+
+            <label>Incident Type</label>
+            <select id="type">
+                <option>Phishing</option>
+                <option>Ransomware</option>
+                <option>Data Breach</option>
+                <option>DDoS</option>
+                <option>Unauthorized Access</option>
+                <option>Other</option>
+            </select>
+
+            <label>Severity</label>
+            <select id="severity">
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+                <option>Critical</option>
+            </select>
+
+            <label>Status</label>
+            <select id="status">
+                <option>Open</option>
+                <option>Under Investigation</option>
+                <option>Resolved</option>
+            </select>
+
+            <label>Incident Date</label>
+            <input id="date" type="date" required>
+
+            <button type="submit">+ Add Incident</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2 class="section-title">Incident Records</h2>
+        <input id="search" placeholder="Search incident records...">
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Name</th><th>Country</th>
+                        <th>Type</th><th>Severity</th>
+                        <th>Status</th><th>Date</th><th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="records"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">CYBERNEX © 2026 | Incident Management</div>
+</div>
+
+<script>
+const KEY = "cybernexIncidents";
+const form = document.getElementById("incidentForm");
+const records = document.getElementById("records");
+const search = document.getElementById("search");
+
+function getData() {
+    try {
+        return JSON.parse(localStorage.getItem(KEY)) || [];
+    } catch {
+        return [];
+    }
+}
+
+function safe(value) {
+    return String(value).replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",
+        '"':"&quot;","'":"&#39;"
+    }[c]));
+}
+
+function display() {
+    const data = getData();
+    const term = search.value.toLowerCase();
+
+    document.getElementById("total").textContent = data.length;
+    document.getElementById("critical").textContent =
+        data.filter(x => x.severity === "Critical").length;
+    document.getElementById("open").textContent =
+        data.filter(x => x.status === "Open").length;
+    document.getElementById("resolved").textContent =
+        data.filter(x => x.status === "Resolved").length;
+
+    const filtered = data.filter(x =>
+        [x.name,x.country,x.organization,x.type]
+        .some(v => v.toLowerCase().includes(term))
+    );
+
+    records.innerHTML = filtered.length ? filtered.map(x => `
+        <tr>
+            <td>${safe(x.id)}</td>
+            <td>${safe(x.name)}</td>
+            <td>${safe(x.country)}</td>
+            <td>${safe(x.type)}</td>
+            <td>${safe(x.severity)}</td>
+            <td>${safe(x.status)}</td>
+            <td>${safe(x.date)}</td>
+            <td><button onclick="removeIncident('${safe(x.id)}')">Delete</button></td>
+        </tr>
+    `).join("") : '<tr><td colspan="8">No incident records found.</td></tr>';
+}
+
+form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const data = getData();
+    data.push({
+        id: "INC" + Date.now(),
+        name: document.getElementById("name").value,
+        country: document.getElementById("country").value,
+        organization: document.getElementById("organization").value,
+        type: document.getElementById("type").value,
+        severity: document.getElementById("severity").value,
+        status: document.getElementById("status").value,
+        date: document.getElementById("date").value
+    });
+
+    localStorage.setItem(KEY, JSON.stringify(data));
+    form.reset();
+    display();
+});
+
+function removeIncident(id) {
+    if (!confirm("Delete this incident record?")) return;
+    localStorage.setItem(KEY, JSON.stringify(
+        getData().filter(x => x.id !== id)
+    ));
+    display();
+}
+
+search.addEventListener("input", display);
+display();
+</script>
+
+</body>
+</html>

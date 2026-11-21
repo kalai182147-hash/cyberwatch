@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response & Recovery | CYBERNEX</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>⚡ CYBERNEX</h2>
+    <p>Cyber Security Platform</p>
+    <a href="../index.html">Dashboard</a>
+    <a href="global-incidents.html">Global Incidents</a>
+    <a href="timeline.html">Incident Timeline</a>
+    <a href="incident-management.html">Incident Management</a>
+    <a href="threat-intelligence.html">Threat Intelligence</a>
+    <a href="evidence.html">Digital Evidence</a>
+    <a href="assets.html">Affected Assets</a>
+    <a class="active" href="response.html">Response & Recovery</a>
+    <a href="reports.html">Reports</a>
+    <a href="settings.html">Settings</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h2>Response & Recovery</h2>
+        <span>CYBERNEX / Response</span>
+    </div>
+
+    <div class="welcome">
+        <h1>Incident Response Center 🛡️</h1>
+        <p>Record response actions and track recovery progress.</p>
+    </div>
+
+    <div class="panel form-card">
+        <h2>➕ Add Response Action</h2>
+
+        <form id="responseForm">
+            <label>Incident Name</label>
+            <input type="text" id="incidentName" placeholder="Enter incident name" required>
+
+            <label>Response Action</label>
+            <select id="action" required>
+                <option value="">Select action</option>
+                <option>Account Security Review</option>
+                <option>System Isolation</option>
+                <option>Password Reset</option>
+                <option>Security Patch</option>
+                <option>Backup Restoration</option>
+                <option>Monitoring</option>
+            </select>
+
+            <label>Responsible Team</label>
+            <input type="text" id="team" placeholder="Enter team name" required>
+
+            <label>Recovery Status</label>
+            <select id="status" required>
+                <option value="">Select status</option>
+                <option>Pending</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Enter response notes"></textarea>
+
+            <button type="submit">Save Response</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>📋 Response Activity Records</h2>
+        <div id="responseList"></div>
+    </div>
+</div>
+
+<script src="../js/response.js"></script>
+
+</body>
+</html>

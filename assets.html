@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affected Assets | CYBERNEX</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">CYBERNEX</div>
+    <div class="tagline">CYBER INCIDENT INTELLIGENCE</div>
+
+    <div class="nav-title">MAIN MENU</div>
+    <a href="../index.html">◈ Dashboard</a>
+    <a href="global-incidents.html">🌍 Global Incident Explorer</a>
+    <a href="timeline.html">◷ Timeline Generator</a>
+
+    <div class="nav-title">MANAGEMENT</div>
+    <a href="incident-management.html">▣ Incident Management</a>
+    <a href="threat-intelligence.html">⌁ Threat Intelligence</a>
+    <a href="evidence.html">▤ Evidence Management</a>
+    <a class="active" href="assets.html">◈ Affected Assets</a>
+
+    <div class="nav-title">OPERATIONS</div>
+    <a href="response.html">⚡ Response & Recovery</a>
+    <a href="reports.html">▥ Reports & Analytics</a>
+    <a href="settings.html">⚙ Settings & Profile</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1>◈ Affected Assets</h1>
+        <div class="status">● ASSET MONITORING</div>
+    </div>
+
+    <div class="welcome">
+        <h2>Asset Monitoring Center</h2>
+        <p>Register and monitor systems, devices and services affected by cyber incidents.</p>
+    </div>
+
+    <div class="stats">
+        <div class="card pink"><p>TOTAL ASSETS</p><h2 id="total">0</h2></div>
+        <div class="card orange"><p>AFFECTED</p><h2 id="affected">0</h2></div>
+        <div class="card blue"><p>MONITORING</p><h2 id="monitoring">0</h2></div>
+        <div class="card green"><p>RECOVERED</p><h2 id="recovered">0</h2></div>
+    </div>
+
+    <div class="form-card">
+        <h2 class="section-title">Register New Asset</h2>
+
+        <form id="assetForm">
+            <label>Asset ID</label>
+            <input id="assetId" placeholder="Example: AST001" required>
+
+            <label>Asset Name</label>
+            <input id="assetName" placeholder="Enter asset name" required>
+
+            <label>Asset Type</label>
+            <select id="assetType">
+                <option>Server</option>
+                <option>Computer</option>
+                <option>Network Device</option>
+                <option>Database</option>
+                <option>Application</option>
+                <option>Other</option>
+            </select>
+
+            <label>Related Incident ID</label>
+            <input id="incidentId" placeholder="Example: INC001">
+
+            <label>Asset Status</label>
+            <select id="assetStatus">
+                <option>Affected</option>
+                <option>Monitoring</option>
+                <option>Recovered</option>
+            </select>
+
+            <button type="submit">+ Add Asset</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2 class="section-title">Asset Records</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asset ID</th>
+                        <th>Asset Name</th>
+                        <th>Type</th>
+                        <th>Incident ID</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="assetTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">CYBERNEX © 2026 | Affected Assets</div>
+</div>
+
+<script src="../js/assets.js"></script>
+
+</body>
+</html>

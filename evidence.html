@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evidence Management | CYBERNEX</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">CYBERNEX</div>
+    <div class="tagline">CYBER INCIDENT INTELLIGENCE</div>
+
+    <div class="nav-title">MAIN MENU</div>
+    <a href="../index.html">◈ Dashboard</a>
+    <a href="global-incidents.html">🌍 Global Incident Explorer</a>
+    <a href="timeline.html">◷ Timeline Generator</a>
+
+    <div class="nav-title">MANAGEMENT</div>
+    <a href="incident-management.html">▣ Incident Management</a>
+    <a href="threat-intelligence.html">⌁ Threat Intelligence</a>
+    <a class="active" href="evidence.html">▤ Evidence Management</a>
+    <a href="assets.html">◈ Affected Assets</a>
+
+    <div class="nav-title">OPERATIONS</div>
+    <a href="response.html">⚡ Response & Recovery</a>
+    <a href="reports.html">▥ Reports & Analytics</a>
+    <a href="settings.html">⚙ Settings & Profile</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1>▤ Evidence Management</h1>
+        <div class="status">● EVIDENCE RECORDS</div>
+    </div>
+
+    <div class="welcome">
+        <h2>Digital Evidence Register</h2>
+        <p>Maintain organized records of evidence related to cyber incidents.</p>
+    </div>
+
+    <div class="form-card">
+        <h2 class="section-title">Add Evidence Record</h2>
+
+        <form id="evidenceForm">
+            <label>Evidence ID</label>
+            <input id="evidenceId" placeholder="Example: EVD001" required>
+
+            <label>Related Incident ID</label>
+            <input id="incidentId" placeholder="Example: INC001" required>
+
+            <label>Evidence Type</label>
+            <select id="evidenceType">
+                <option>Log File</option>
+                <option>Network Record</option>
+                <option>Screenshot Reference</option>
+                <option>System Record</option>
+                <option>Other</option>
+            </select>
+
+            <label>Collected By</label>
+            <input id="collector" placeholder="Enter collector name" required>
+
+            <label>Collection Date</label>
+            <input id="date" type="date" required>
+
+            <label>Verification Status</label>
+            <select id="verification">
+                <option>Pending</option>
+                <option>Verified</option>
+                <option>Under Review</option>
+            </select>
+
+            <button type="submit">+ Add Evidence Record</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2 class="section-title">Evidence Records</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Evidence ID</th>
+                        <th>Incident ID</th>
+                        <th>Type</th>
+                        <th>Collected By</th>
+                        <th>Date</th>
+                        <th>Verification</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="evidenceTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel">
+        <p class="description">
+            Note: This academic demo stores evidence record details in the browser.
+            It does not upload or preserve actual forensic evidence files.
+        </p>
+    </div>
+
+    <div class="footer">CYBERNEX © 2026 | Evidence Management</div>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>

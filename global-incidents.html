@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Incident Explorer | CYBERNEX</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">CYBERNEX</div>
+    <div class="tagline">CYBER INCIDENT INTELLIGENCE</div>
+
+    <div class="nav-title">MAIN MENU</div>
+    <a href="../index.html">◈ Dashboard</a>
+    <a class="active" href="global-incidents.html">🌍 Global Incident Explorer</a>
+    <a href="timeline.html">◷ Timeline Generator</a>
+
+    <div class="nav-title">MANAGEMENT</div>
+    <a href="incident-management.html">▣ Incident Management</a>
+    <a href="threat-intelligence.html">⌁ Threat Intelligence</a>
+    <a href="evidence.html">▤ Evidence Management</a>
+    <a href="assets.html">◈ Affected Assets</a>
+
+    <div class="nav-title">OPERATIONS</div>
+    <a href="response.html">⚡ Response & Recovery</a>
+    <a href="reports.html">▥ Reports & Analytics</a>
+    <a href="settings.html">⚙ Settings & Profile</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1>🌍 Global Incident Explorer</h1>
+        <div class="status">● EXPLORER ACTIVE</div>
+    </div>
+
+    <div class="welcome">
+        <h2>Explore Global Cyber Incidents</h2>
+        <p>Explore illustrative cyber incident records from different countries and organizations.</p>
+    </div>
+
+    <div class="panel">
+        <h2 class="section-title">Search & Filter</h2>
+
+        <label>Search Incident</label>
+        <input type="text" id="search" placeholder="Search country, organization or incident...">
+
+        <label>Filter by Country</label>
+        <select id="country">
+            <option value="all">All Countries</option>
+            <option>India</option>
+            <option>USA</option>
+            <option>United Kingdom</option>
+            <option>Japan</option>
+            <option>Germany</option>
+        </select>
+    </div>
+
+    <h2 class="section-title">Incident Records</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Incident ID</th>
+                    <th>Incident Name</th>
+                    <th>Country</th>
+                    <th>Organization</th>
+                    <th>Type</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody id="incidentTable"></tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        CYBERNEX © 2026 | Illustrative academic demo records
+    </div>
+</div>
+
+<script>
+const incidents = [
+ {id:"CNX001",name:"Data Exposure Event",country:"India",org:"Demo Finance Group",type:"Data Breach",severity:"High"},
+ {id:"CNX002",name:"Network Service Disruption",country:"USA",org:"Demo Cloud Services",type:"DDoS",severity:"Critical"},
+ {id:"CNX003",name:"Suspicious Email Campaign",country:"United Kingdom",org:"Demo Retail Group",type:"Phishing",severity:"Medium"},
+ {id:"CNX004",name:"Unauthorized Access Alert",country:"Japan",org:"Demo Technology Ltd",type:"Unauthorized Access",severity:"High"},
+ {id:"CNX005",name:"System Security Alert",country:"Germany",org:"Demo Manufacturing",type:"Malware Alert",severity:"Medium"}
+];
+
+const search = document.getElementById("search");
+const country = document.getElementById("country");
+const table = document.getElementById("incidentTable");
+
+function displayIncidents() {
+    const term = search.value.toLowerCase();
+    const selected = country.value;
+
+    const filtered = incidents.filter(item =>
+        (selected === "all" || item.country === selected) &&
+        (item.name.toLowerCase().includes(term) ||
+         item.country.toLowerCase().includes(term) ||
+         item.org.toLowerCase().includes(term) ||
+         item.type.toLowerCase().includes(term))
+    );
+
+    table.innerHTML = filtered.length
+      ? filtered.map(item => `
+        <tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td>${item.country}</td>
+          <td>${item.org}</td>
+          <td>${item.type}</td>
+          <td><span class="badge">${item.severity}</span></td>
+        </tr>`).join("")
+      : '<tr><td colspan="6">No matching demo records found.</td></tr>';
+}
+
+search.addEventListener("input", displayIncidents);
+country.addEventListener("change", displayIncidents);
+displayIncidents();
+</script>
+
+</body>
+</html>
